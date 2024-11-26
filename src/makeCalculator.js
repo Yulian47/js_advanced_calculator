@@ -4,18 +4,19 @@
  * @return {object}
  */
 function makeCalculator() {
-  let result = 0;
   const calculator = {
+    result: 0,
+
     operate(callback, number) {
-      if (typeof callback === 'function') {
-        result = callback(result, number);
-      }
+      this.result = callback(this.result, number);
 
       return this;
     },
 
-    getResult() {
-      return result;
+    reset() {
+      this.result = 0;
+
+      return this;
     },
 
     add(a, b) {
@@ -31,17 +32,7 @@ function makeCalculator() {
     },
 
     divide(a, b) {
-      if (b !== 0) {
-        return a / b;
-      } else {
-        return a;
-      }
-    },
-
-    reset() {
-      result = 0;
-
-      return this;
+      return b === 0 ? a : a / b;
     },
   };
 
